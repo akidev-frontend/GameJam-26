@@ -103,25 +103,29 @@ namespace GameJam.UI
 
             yield return new WaitForSeconds(confirmDuration);
 
-            // Fundido a negro antes de cambiar de escena (si hay overlay configurado)
+            string destination = sceneDestinations != null && index < sceneDestinations.Length
+                ? sceneDestinations[index]
+                : null;
+
+            // Sin destino: cerrar directamente, sin fundido ni esperas
+            if (string.IsNullOrEmpty(destination))
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+                yield break;
+            }
+
+            // Fundido a negro solo al cambiar de escena
             if (fadeOutDuration > 0f)
             {
                 var fade = Object.FindFirstObjectByType<FadeIn>();
                 if (fade) yield return StartCoroutine(fade.FadeOut(fadeOutDuration));
             }
 
-            string destination = sceneDestinations != null && index < sceneDestinations.Length
-                ? sceneDestinations[index]
-                : null;
-
-            if (!string.IsNullOrEmpty(destination))
-            {
-                SceneManager.LoadScene(destination);
-            }
-            else
-            {
-                Application.Quit();
-            }
+            SceneManager.LoadScene(destination);
         }
 
         // Devuelve el índice del botón que contiene el punto, o -1 si ninguno
