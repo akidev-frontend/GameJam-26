@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9afe16c6bd274244ba26aace1ee0392b
+guid: 8878ba6cc411e4b4c90a38178782fed8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7304693084116366672
-    second: Sprites del nivell cursed_0
+      213: 8527459943419607272
+    second: Sin_titulo_32_202611220019_41686_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprites del nivell cursed_0
+      name: Sin_titulo_32_202611220019_41686_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2800
-        height: 1840
+        x: 1611
+        y: 1660
+        width: 161
+        height: 170
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 055320878ab7f5560800000000000000
-      internalID: 7304693084116366672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sprites del nivell cursed_1
-      rect:
-        serializedVersion: 2
-        x: 2096
-        y: 1613
-        width: 198
-        height: 199
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d8a10eb2c416fa469784a0f2aecf86d
-      internalID: 838906670
+      spriteID: 8e8f5eb53af975670800000000000000
+      internalID: 8527459943419607272
       vertices: []
       indices: 
       edges: []
@@ -147,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2675592306dcc454d9393c5f0818bff6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -157,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprites del nivell cursed_0: 7304693084116366672
-      Sprites del nivell cursed_1: 838906670
+      Sin_titulo_32_202611220019_41686_0: 8527459943419607272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

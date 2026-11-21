@@ -1,0 +1,897 @@
+fileFormatVersion: 2
+guid: 621ccd5ea88aace41b1a59ae262e7966
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 375346047539260767
+    second: Png dels sprites del nivell cursed_0
+  - first:
+      213: -571565988805298978
+    second: Png dels sprites del nivell cursed_1
+  - first:
+      213: -3590496562078451818
+    second: Png dels sprites del nivell cursed_2
+  - first:
+      213: -3504304417738983353
+    second: Png dels sprites del nivell cursed_3
+  - first:
+      213: 561951798830262854
+    second: Png dels sprites del nivell cursed_4
+  - first:
+      213: -7161398453215553934
+    second: Png dels sprites del nivell cursed_5
+  - first:
+      213: 816925685331783501
+    second: Png dels sprites del nivell cursed_6
+  - first:
+      213: -4303873229684739917
+    second: Png dels sprites del nivell cursed_7
+  - first:
+      213: 5562083705332152556
+    second: Png dels sprites del nivell cursed_8
+  - first:
+      213: -509836604004073966
+    second: Png dels sprites del nivell cursed_9
+  - first:
+      213: -1122224931686171821
+    second: Png dels sprites del nivell cursed_10
+  - first:
+      213: -1562670648705441571
+    second: Png dels sprites del nivell cursed_11
+  - first:
+      213: 4348518024953853238
+    second: Png dels sprites del nivell cursed_12
+  - first:
+      213: -8851018893112798045
+    second: Png dels sprites del nivell cursed_13
+  - first:
+      213: 7178720795866580185
+    second: Png dels sprites del nivell cursed_14
+  - first:
+      213: 4718271596962002443
+    second: Png dels sprites del nivell cursed_15
+  - first:
+      213: -7038268084418679688
+    second: Png dels sprites del nivell cursed_16
+  - first:
+      213: 4922767398912908857
+    second: Png dels sprites del nivell cursed_17
+  - first:
+      213: -8879793458169847980
+    second: Png dels sprites del nivell cursed_18
+  - first:
+      213: 548156365913303249
+    second: Png dels sprites del nivell cursed_19
+  - first:
+      213: -5223893519049923087
+    second: Png dels sprites del nivell cursed_20
+  - first:
+      213: 2075365154826979601
+    second: Png dels sprites del nivell cursed_21
+  - first:
+      213: 3031331636190391342
+    second: Png dels sprites del nivell cursed_22
+  - first:
+      213: -798611673618671268
+    second: Png dels sprites del nivell cursed_23
+  - first:
+      213: 4577368230276322871
+    second: Png dels sprites del nivell cursed_24
+  - first:
+      213: 5150074716480056138
+    second: Png dels sprites del nivell cursed_25
+  - first:
+      213: 6068317353367281223
+    second: Png dels sprites del nivell cursed_26
+  - first:
+      213: 2730881393695082143
+    second: Png dels sprites del nivell cursed_27
+  - first:
+      213: 7658354893823159358
+    second: Png dels sprites del nivell cursed_28
+  - first:
+      213: 1412295183475449111
+    second: Png dels sprites del nivell cursed_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_0
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 930
+        width: 532
+        height: 854
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5dac67dd3f753500800000000000000
+      internalID: 375346047539260767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_1
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1655
+        width: 167
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed4b09fe2c36118f0800000000000000
+      internalID: -571565988805298978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_2
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 1660
+        width: 161
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6977d0a666efb2ec0800000000000000
+      internalID: -3590496562078451818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_3
+      rect:
+        serializedVersion: 2
+        x: 1896
+        y: 1668
+        width: 140
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 748f5dbd2b53e5fc0800000000000000
+      internalID: -3504304417738983353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_4
+      rect:
+        serializedVersion: 2
+        x: 2091
+        y: 1607
+        width: 209
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64a6b260f247cc700800000000000000
+      internalID: 561951798830262854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_5
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 1617
+        width: 210
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2761e0dac0a9d9c90800000000000000
+      internalID: -7161398453215553934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_6
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1566
+        width: 210
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4fe712259d465b00800000000000000
+      internalID: 816925685331783501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_7
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 1352
+        width: 205
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0f35ab9129544c0800000000000000
+      internalID: -4303873229684739917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_8
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 1349
+        width: 229
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8bf4b29ad703d40800000000000000
+      internalID: 5562083705332152556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_9
+      rect:
+        serializedVersion: 2
+        x: 1819
+        y: 1350
+        width: 240
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21e78d45f42bce8f0800000000000000
+      internalID: -509836604004073966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_10
+      rect:
+        serializedVersion: 2
+        x: 2142
+        y: 1366
+        width: 485
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b32c4de5e0d60f0800000000000000
+      internalID: -1122224931686171821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_11
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 976
+        width: 285
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd0abfa0357405ae0800000000000000
+      internalID: -1562670648705441571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_12
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 977
+        width: 285
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 635f1c0ba1a095c30800000000000000
+      internalID: 4348518024953853238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_13
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 979
+        width: 281
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a49dbf163dda2580800000000000000
+      internalID: -8851018893112798045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_14
+      rect:
+        serializedVersion: 2
+        x: 2372
+        y: 986
+        width: 281
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d446538780ff9360800000000000000
+      internalID: 7178720795866580185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_15
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 521
+        width: 781
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b063cbad40baa7140800000000000000
+      internalID: 4718271596962002443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_16
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 538
+        width: 301
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87c6142b77c035e90800000000000000
+      internalID: -7038268084418679688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_17
+      rect:
+        serializedVersion: 2
+        x: 1625
+        y: 529
+        width: 301
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93ed31c0ede215440800000000000000
+      internalID: 4922767398912908857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_18
+      rect:
+        serializedVersion: 2
+        x: 2072
+        y: 542
+        width: 286
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45fd2fe95e2a4c480800000000000000
+      internalID: -8879793458169847980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_19
+      rect:
+        serializedVersion: 2
+        x: 2367
+        y: 546
+        width: 286
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d8a1af7f417b9700800000000000000
+      internalID: 548156365913303249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_20
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 165
+        width: 294
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f5609495800187b0800000000000000
+      internalID: -5223893519049923087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_21
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 167
+        width: 294
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1198fa0dc9d2dcc10800000000000000
+      internalID: 2075365154826979601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_22
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 168
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c288bff04711a20800000000000000
+      internalID: 3031331636190391342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_23
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 168
+        width: 294
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c599a700ae2cae4f0800000000000000
+      internalID: -798611673618671268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_24
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 168
+        width: 80
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73657cb4724168f30800000000000000
+      internalID: 4577368230276322871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_25
+      rect:
+        serializedVersion: 2
+        x: 1473
+        y: 167
+        width: 294
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ba38a1badb87740800000000000000
+      internalID: 5150074716480056138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_26
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 164
+        width: 96
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74e9bc74b7ef63450800000000000000
+      internalID: 6068317353367281223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_27
+      rect:
+        serializedVersion: 2
+        x: 1940
+        y: 171
+        width: 294
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f964be2a82a06e520800000000000000
+      internalID: 2730881393695082143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_28
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 164
+        width: 119
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3c24324331f74a60800000000000000
+      internalID: 7658354893823159358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Png dels sprites del nivell cursed_29
+      rect:
+        serializedVersion: 2
+        x: 2357
+        y: 188
+        width: 268
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d9c099cfa799310800000000000000
+      internalID: 1412295183475449111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Png dels sprites del nivell cursed_0: 375346047539260767
+      Png dels sprites del nivell cursed_1: -571565988805298978
+      Png dels sprites del nivell cursed_10: -1122224931686171821
+      Png dels sprites del nivell cursed_11: -1562670648705441571
+      Png dels sprites del nivell cursed_12: 4348518024953853238
+      Png dels sprites del nivell cursed_13: -8851018893112798045
+      Png dels sprites del nivell cursed_14: 7178720795866580185
+      Png dels sprites del nivell cursed_15: 4718271596962002443
+      Png dels sprites del nivell cursed_16: -7038268084418679688
+      Png dels sprites del nivell cursed_17: 4922767398912908857
+      Png dels sprites del nivell cursed_18: -8879793458169847980
+      Png dels sprites del nivell cursed_19: 548156365913303249
+      Png dels sprites del nivell cursed_2: -3590496562078451818
+      Png dels sprites del nivell cursed_20: -5223893519049923087
+      Png dels sprites del nivell cursed_21: 2075365154826979601
+      Png dels sprites del nivell cursed_22: 3031331636190391342
+      Png dels sprites del nivell cursed_23: -798611673618671268
+      Png dels sprites del nivell cursed_24: 4577368230276322871
+      Png dels sprites del nivell cursed_25: 5150074716480056138
+      Png dels sprites del nivell cursed_26: 6068317353367281223
+      Png dels sprites del nivell cursed_27: 2730881393695082143
+      Png dels sprites del nivell cursed_28: 7658354893823159358
+      Png dels sprites del nivell cursed_29: 1412295183475449111
+      Png dels sprites del nivell cursed_3: -3504304417738983353
+      Png dels sprites del nivell cursed_4: 561951798830262854
+      Png dels sprites del nivell cursed_5: -7161398453215553934
+      Png dels sprites del nivell cursed_6: 816925685331783501
+      Png dels sprites del nivell cursed_7: -4303873229684739917
+      Png dels sprites del nivell cursed_8: 5562083705332152556
+      Png dels sprites del nivell cursed_9: -509836604004073966
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
