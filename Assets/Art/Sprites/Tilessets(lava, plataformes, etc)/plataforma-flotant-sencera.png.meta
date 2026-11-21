@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9f6fca97644dca7ab8bb293e0a68fd6b
+guid: d47bfd5e8f9198743bbc1fb0ab8dc7c0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1920070817684351241
-    second: plataforma-flotant-pota_0
+      213: -8159492625522179039
+    second: plataforma-flotant-sencera_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,23 +100,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plataforma-flotant-pota_0
+      name: plataforma-flotant-sencera_0
       rect:
         serializedVersion: 2
-        x: 29
+        x: 0
         y: 0
-        width: 202
+        width: 200
         height: 250
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f69458a3c98a55e0800000000000000
-      internalID: -1920070817684351241
+      spriteID: 124c45c10b8a3ce80800000000000000
+      internalID: -8159492625522179039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plataforma-flotant-sencera_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eda5b27d99a6d3468d6a239fa0e4fe0
+      internalID: -679360751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plataforma-flotant-sencera_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f36c2418a2f1941b0bb42d32f56af0
+      internalID: -1046215631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plataforma-flotant-sencera_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b0b62908e93eff489d7cee073d0cfb6
+      internalID: -1651252264
       vertices: []
       indices: 
       edges: []
@@ -125,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 082d4f4b41d43f842a4b7f8e1cb42a02
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +199,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":200.0,"y":250.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      plataforma-flotant-pota_0: -1920070817684351241
+      plataforma-flotant-sencera_0: -8159492625522179039
+      plataforma-flotant-sencera_1: -679360751
+      plataforma-flotant-sencera_2: -1046215631
+      plataforma-flotant-sencera_3: -1651252264
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
