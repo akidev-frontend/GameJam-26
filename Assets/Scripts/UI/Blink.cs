@@ -16,6 +16,10 @@ namespace GameJam.UI
 
         private SpriteRenderer sr;
 
+        // Estado del parpadeo rápido temporal (confirmación de clic)
+        private float fastUntil = -1f;
+        private float fastBps;
+
         private void Awake()
         {
             sr = GetComponent<SpriteRenderer>();
@@ -32,9 +36,21 @@ namespace GameJam.UI
             SetVisible(true);
         }
 
+        /// <summary>
+        /// Fuerza un parpadeo más rápido durante 'seconds' segundos
+        /// (se usa como feedback al confirmar una opción del menú).
+        /// </summary>
+        public void BlinkFast(float seconds, float blinksPerSecondFast)
+        {
+            fastUntil = Time.time + seconds;
+            fastBps = blinksPerSecondFast;
+            SetVisible(true);
+        }
+
         private void Update()
         {
-            float t = (Time.time * blinksPerSecond) % 1f;
+            float bps = Time.time < fastUntil ? fastBps : blinksPerSecond;
+            float t = (Time.time * bps) % 1f;
             SetVisible(t < dutyCycle);
         }
 
