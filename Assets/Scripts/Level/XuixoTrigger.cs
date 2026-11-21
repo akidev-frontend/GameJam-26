@@ -65,10 +65,18 @@ namespace GameJam.Level
             if (triggered) return;
             if (!other.GetComponent<GameJam.Player.PlayerController2D>()) return;
 
+            Debug.Log("[XuixoTrigger] Player tocó la hitbox de xuixo_plat_0", this);
             triggered = true;
 
             if (dialogue != null)
+            {
+                Debug.Log("[XuixoTrigger] Reproduciendo diálogo.", this);
                 dialogue.Play(dialogueLines);
+            }
+            else
+            {
+                Debug.LogWarning("[XuixoTrigger] No hay DialogueSystem asignado.", this);
+            }
 
             foreach (var go in activateOnTouch)
                 if (go) go.SetActive(true);
@@ -79,7 +87,19 @@ namespace GameJam.Level
             if (cocinero != null && spriteEnfadado != null)
             {
                 var sr = cocinero.GetComponent<SpriteRenderer>();
-                if (sr) sr.sprite = spriteEnfadado;
+                if (sr)
+                {
+                    Debug.Log("[XuixoTrigger] Cambiando sprite del cocinero a enfadado.", this);
+                    sr.sprite = spriteEnfadado;
+                }
+                else
+                {
+                    Debug.LogWarning("[XuixoTrigger] El cocinero no tiene SpriteRenderer.", this);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[XuixoTrigger] Cocinero o spriteEnfadado no asignados.", this);
             }
 
             onPlayerTouch.Invoke();
