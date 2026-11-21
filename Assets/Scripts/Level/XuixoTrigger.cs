@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,10 +16,28 @@ namespace GameJam.Level
     {
         [Header("Referencias opcionales")]
         [SerializeField] private GameJam.UI.DialogueSystem dialogue;
+        [Tooltip("Texto que desaparece justo al tocar (p. ej. el DialogueText de bienvenida).")]
+        [SerializeField] private GameObject textoAnterior;
         [SerializeField, TextArea] private string[] dialogueLines =
         {
             "¡Regla rota!",
             "A partir de ahora todo cambia.",
+        };
+
+        [System.Serializable]
+        public class PasoDialogo
+        {
+            [TextArea] public string texto = "...";
+            [Tooltip("Segundos que se muestra este texto antes del siguiente.")]
+            public float duracion = 1.5f;
+        }
+
+        [Header("Secuencia de texto")]
+        [Tooltip("Frases que se muestran en orden; cada una dura 'duracion' segundos.")]
+        [SerializeField] private List<PasoDialogo> pasos = new()
+        {
+            new PasoDialogo { texto = "...", duracion = 1.5f },
+            new PasoDialogo { texto = "Regla cambiada.", duracion = 2f },
         };
 
         [Header("Objetos")]
@@ -68,10 +87,15 @@ namespace GameJam.Level
             Debug.Log("[XuixoTrigger] Player tocó la hitbox de xuixo_plat_0", this);
             triggered = true;
 
+            // El texto de arriba (DialogueText) desaparece justo al tocar;
+            // en su lugar aparece otro con la secuencia nueva.
+            if (textoAnterior != null)
+                textoAnterior.SetActive(false);
+
             if (dialogue != null)
             {
-                Debug.Log("[XuixoTrigger] Reproduciendo diálogo.", this);
-                dialogue.Play(dialogueLines);
+                dialogue.Vaciar();
+                StartCoroutine(PlayDialogueSequence());
             }
             else
             {
@@ -103,6 +127,21 @@ namespace GameJam.Level
             }
 
             onPlayerTouch.Invoke();
+        }
+
+        /// <summary>
+        /// Muestra cada paso de la secuencia en orden, esperando su duración.
+        /// </summary>
+        private IEnumerator PlayDialogueSequence()
+        {
+            if (!dialogue) yield break;
+
+            foreach (var paso in pasos)
+            {
+                if (paso == null) continue;
+                dialogue.Play(new[] { paso.texto });
+                yield return new WaitForSeconds(paso.duracion);
+            }
         }
     }
 }
