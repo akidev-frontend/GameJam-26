@@ -1061,6 +1061,9 @@ MonoBehaviour:
   - A partir de ahora todo cambia.
   activateOnTouch: []
   deactivateOnTouch: []
+  cocinero: {fileID: 1030402426}
+  spriteEnfadado: {fileID: -2916633210370352295, guid: c100dfebc8a7713768dbaa86c8012805, type: 3}
+  buscarCocineroAutomatico: 1
   onPlayerTouch:
     m_PersistentCalls:
       m_Calls: []

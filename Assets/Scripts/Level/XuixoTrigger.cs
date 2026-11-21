@@ -25,6 +25,12 @@ namespace GameJam.Level
         [SerializeField] private GameObject[] activateOnTouch;
         [SerializeField] private GameObject[] deactivateOnTouch;
 
+        [Header("Cocinero")]
+        [SerializeField] private GameObject cocinero;
+        [SerializeField] private Sprite spriteEnfadado;
+        [Tooltip("Si no se asignó cocinero, busca el primero llamado cocinero en la escena.")]
+        [SerializeField] private bool buscarCocineroAutomatico = true;
+
         [Header("Evento")]
         [Tooltip("Cableá aquí los acontecimientos extra del nivel (cámara, reglas, sonido, etc.).")]
         public UnityEvent onPlayerTouch;
@@ -36,6 +42,10 @@ namespace GameJam.Level
             // Si no se asignó diálogo desde el Inspector, busca uno en la escena.
             if (!dialogue)
                 dialogue = UnityEngine.Object.FindFirstObjectByType<GameJam.UI.DialogueSystem>();
+
+            // Fallback: localizar el cocinero por nombre si no se asignó.
+            if (!cocinero && buscarCocineroAutomatico)
+                cocinero = GameObject.Find("cocinero_0") ?? GameObject.Find("cocinero");
         }
 
         private void Reset()
@@ -55,15 +65,42 @@ namespace GameJam.Level
             if (triggered) return;
             if (!other.GetComponent<GameJam.Player.PlayerController2D>()) return;
 
+            Debug.Log("[XuixoTrigger] Player tocó la hitbox de xuixo_plat_0", this);
             triggered = true;
 
             if (dialogue != null)
+            {
+                Debug.Log("[XuixoTrigger] Reproduciendo diálogo.", this);
                 dialogue.Play(dialogueLines);
+            }
+            else
+            {
+                Debug.LogWarning("[XuixoTrigger] No hay DialogueSystem asignado.", this);
+            }
 
             foreach (var go in activateOnTouch)
                 if (go) go.SetActive(true);
             foreach (var go in deactivateOnTouch)
                 if (go) go.SetActive(false);
+
+            // Cambiar sprite del cocinero al enfadado (mismas posición y rotación).
+            if (cocinero != null && spriteEnfadado != null)
+            {
+                var sr = cocinero.GetComponent<SpriteRenderer>();
+                if (sr)
+                {
+                    Debug.Log("[XuixoTrigger] Cambiando sprite del cocinero a enfadado.", this);
+                    sr.sprite = spriteEnfadado;
+                }
+                else
+                {
+                    Debug.LogWarning("[XuixoTrigger] El cocinero no tiene SpriteRenderer.", this);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[XuixoTrigger] Cocinero o spriteEnfadado no asignados.", this);
+            }
 
             onPlayerTouch.Invoke();
         }
