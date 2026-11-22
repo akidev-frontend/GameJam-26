@@ -1677,7 +1677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Level.DialogueSceneTransition
   dialogue: {fileID: 373366419}
   fader: {fileID: 2131824756}
-  delayAfterDialogue: 0.5
+  delayAfterDialogue: 0.2
   fadeDuration: 0.8
   targetScene: Level2(normal)
   triggerOnce: 1
