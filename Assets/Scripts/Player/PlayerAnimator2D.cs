@@ -19,9 +19,9 @@ namespace GameJam.Player
         [Tooltip("Sprite del xuixo que se muestra en la mano durante la animación de comer.")]
         [SerializeField] private Sprite xuixoHeldSprite;
         [Tooltip("Posición local del xuixo respecto al jugador (por encima de la cabeza).")]
-        [SerializeField] private Vector2 xuixoOffset = new Vector2(0.03f, 0.17f);
+        [SerializeField] private Vector2 xuixoOffset = new Vector2(0.00f, 0.17f);
         [Tooltip("Escala local del xuixo sostenido.")]
-        [SerializeField] private float xuixoScale = 0.22f;
+        [SerializeField] private float xuixoScale = 0.30f;
 
         private Rigidbody2D rb;
         private Animator animator;
