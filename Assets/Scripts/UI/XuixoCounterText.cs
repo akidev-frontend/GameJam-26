@@ -3,6 +3,17 @@ using UnityEngine.SceneManagement;
 
 namespace GameJam.UI
 {
+    /// <summary>Modo de colocación del contador de xiuxos.</summary>
+    public enum XuixoCounterAnchor
+    {
+        /// <summary>Usa tal cual la posición (y escala/rotación) del objeto en la escena.</summary>
+        Manual,
+        /// <summary>Se alinea dentro del cartel PosterContadorXuxo.</summary>
+        Cartel,
+        /// <summary>Se ancla a la esquina superior izquierda de la cámara.</summary>
+        EsquinaCamara
+    }
+
     /// <summary>
     /// Contador global de trozos de xiuxo comidos. Se muestra arriba a la
     /// izquierda con la misma tipografía que el resto de textos (TextMesh).
@@ -16,11 +27,16 @@ namespace GameJam.UI
         [Tooltip("Total de trozos de xiuxo = número de niveles jugables (7 levels - 1, el Level1 no cuenta).")]
         [SerializeField] private int totalPieces = 6;
 
-        [Tooltip("Márgenes (0-1) respecto a la esquina superior izquierda de la cámara.")]
+        [Header("Colocación")]
+        [Tooltip("Manual: respeta la posición que le des al objeto en cada escena (mueve el ContadorXuxo y listo). " +
+                 "Cartel: se pega al PosterContadorXuxo. EsquinaCamara: esquina superior izquierda de la cámara.")]
+        [SerializeField] private XuixoCounterAnchor anchor = XuixoCounterAnchor.Manual;
+
+        [Tooltip("Márgenes (0-1) respecto a la esquina superior izquierda de la cámara. Solo en modo EsquinaCamara.")]
         [SerializeField] private float marginX = 0.04f;
         [SerializeField] private float marginY = 0.95f;
 
-        [Tooltip("Cartel de fondo. Si está vacío se busca 'PosterContadorXuxo'. Con cartel, el texto se ancla a él.")]
+        [Tooltip("Cartel de fondo. Si está vacío se busca 'PosterContadorXuxo'. Solo se usa en modo Cartel.")]
         [SerializeField] private Transform poster;
         [Tooltip("Margen horizontal (unidades de mundo) desde el borde izquierdo del cartel.")]
         [SerializeField] private float posterPadding = 0.25f;
@@ -45,10 +61,13 @@ namespace GameJam.UI
 
             // El texto se pega al cartel para quedar siempre encima de él
             // (el cartel es unlit: se ve también en niveles a oscuras).
-            if (poster == null)
-                poster = GameObject.Find("PosterContadorXuxo")?.transform;
-            if (poster != null)
-                posterRenderer = poster.GetComponent<SpriteRenderer>();
+            if (anchor == XuixoCounterAnchor.Cartel)
+            {
+                if (poster == null)
+                    poster = GameObject.Find("PosterContadorXuxo")?.transform;
+                if (poster != null)
+                    posterRenderer = poster.GetComponent<SpriteRenderer>();
+            }
 
             // Si volvemos a un nivel igual o anterior al último visto (reinicio
             // de partida, volver al menú y empezar de nuevo...), el contador
@@ -76,9 +95,12 @@ namespace GameJam.UI
 
         private void LateUpdate()
         {
-            // Si hay cartel, el texto se alinea dentro de él. El cartel no lleva
+            // Modo Manual: no tocamos nada, manda la posición puesta en la escena.
+            if (anchor == XuixoCounterAnchor.Manual) return;
+
+            // Modo cartel: el texto se alinea dentro de él. El cartel no lleva
             // script: queda fijo, así que el HUD tampoco se mueve con la cámara.
-            if (poster)
+            if (anchor == XuixoCounterAnchor.Cartel && poster)
             {
                 float leftEdge = posterRenderer
                     ? poster.position.x - posterRenderer.bounds.extents.x
@@ -87,7 +109,7 @@ namespace GameJam.UI
                 return;
             }
 
-            // Sin cartel: anclado a la esquina superior izquierda de la cámara.
+            // Esquina superior izquierda de la cámara (o modo Cartel sin cartel).
             if (!mainCamera) mainCamera = Camera.main;
             if (!mainCamera) return;
 
