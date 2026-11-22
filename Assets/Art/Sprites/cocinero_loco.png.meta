@@ -108,7 +108,7 @@ TextureImporter:
         width: 46
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -121,11 +121,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: cocinero_loco_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 37
+        width: 24
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882e0a35a23ef7d4b85b5eddebb9cd3c
+      internalID: 345502755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 63e9265459e27734a99e9ec49b7a7eaa
     internalID: 0
     vertices: []
     indices: 
@@ -136,6 +158,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       cocinero_loco_0: 1087926647148862592
+      cocinero_loco_1: 345502755
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
