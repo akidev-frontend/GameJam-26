@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameJam.UI
 {
@@ -47,6 +48,10 @@ namespace GameJam.UI
 
         /// <summary>True mientras se está escribiendo la línea actual carácter a carácter.</summary>
         public bool IsTyping => typing;
+
+        [Header("Evento")]
+        [Tooltip("Se dispara cuando la secuencia completa termina (tras el hold de la última línea). No se dispara si loop está activo ni si se corta con Vaciar().")]
+        public UnityEvent onFinish;
 
         private void Awake()
         {
@@ -120,6 +125,9 @@ namespace GameJam.UI
                         : lineHoldSeconds;
                     yield return new WaitForSeconds(hold);
                 }
+
+                // Secuencia completa (sin loop): notificar el final.
+                if (!loop) onFinish?.Invoke();
             }
             while (loop);
         }
