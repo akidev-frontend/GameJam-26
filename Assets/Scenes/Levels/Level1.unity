@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 45139659}
   - component: {fileID: 45139658}
   - component: {fileID: 45139660}
+  - component: {fileID: 45139661}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -247,6 +248,14 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!81 &45139661
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45139657}
+  m_Enabled: 1
 --- !u!1 &67713956
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,8 +473,11 @@ MonoBehaviour:
   startDelay: 0
   charsPerSecond: 30
   lineHoldSeconds: 1.5
+  lineDurations: []
+  maxCharsPerLine: 40
   loop: 0
   playOnStart: 0
+  voiceSource: {fileID: 0}
 --- !u!102 &373366420
 TextMesh:
   serializedVersion: 3
@@ -547,7 +559,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.98, y: 8.58, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1062,8 +1074,15 @@ MonoBehaviour:
   - A partir de ahora todo cambia.
   pasos:
   - texto: ...
-    duracion: 1.5
-  - texto: Regla cambiada.
+    duracion: 2
+  - texto: '!JA!'
+    duracion: 1
+  - texto: "ca\xEDste en mi trampa rata inmunda"
+    duracion: 1.6
+  - texto: "ahora solo es cuesti\xF3n de tiempo que mueras\ny te retuerzas en tu
+      tumba"
+    duracion: 3
+  - texto: "\xA1Le robaste los dulces al pastelero equivocado!"
     duracion: 2
   activateOnTouch: []
   deactivateOnTouch: []
@@ -1361,6 +1380,7 @@ GameObject:
   - component: {fileID: 1854267117}
   - component: {fileID: 1854267116}
   - component: {fileID: 1854267115}
+  - component: {fileID: 1854267120}
   m_Layer: 0
   m_Name: DialogueText
   m_TagString: Untagged
@@ -1381,13 +1401,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.UI.DialogueSystem
   lines:
-  - Bienvenido a Reglas Rotas...
-  - "Aqu\xED las reglas cambian en cada nivel."
+  - Hola ratita...
+  - "Aqu\xED las reglas cambian en cada nivel dddd d  fsfdsfdfsd "
+  - dd
   startDelay: 2.46
   charsPerSecond: 30
   lineHoldSeconds: 1.5
+  lineDurations:
+  - 1
+  - 2
+  maxCharsPerLine: 20
   loop: 0
   playOnStart: 1
+  voiceSource: {fileID: 1854267120}
 --- !u!114 &1854267116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,11 +1507,108 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.98, y: 8.58, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1854267120
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854267114}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: c5702b8b55e15d14f89c10c897e6cd5a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2131824755
 GameObject:
   m_ObjectHideFlags: 0
