@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 namespace GameJam.UI
 {
     /// <summary>
-    /// Mueve la flecha del menú hacia el botón sobre el que esté el ratón.
-    /// Detecta el hover comparando la posición del ratón (convertida a coordenadas
-    /// de mundo) con los bounds del SpriteRenderer de cada botón.
+    /// Controlador de la flecha del menú: ratón + teclado.
+    /// El ratón mueve la flecha al botón bajo el cursor y el clic lo confirma.
+    /// Con el teclado, W/S (o flechas) mueven la selección y Enter confirma,
+    /// ejecutando exactamente la misma acción que el clic.
     /// </summary>
     public class MenuArrowFollow : MonoBehaviour
     {
@@ -34,11 +35,24 @@ namespace GameJam.UI
         [Tooltip("Duración del fundido a negro antes de cambiar de escena (0 = sin fundido).")]
         [SerializeField] private float fadeOutDuration = 0.8f;
 
+        [Header("Teclado")]
+        [Tooltip("Tecla para subir la selección.")]
+        [SerializeField] private Key navUpKey = Key.W;
+        [Tooltip("Tecla alternativa para subir la selección.")]
+        [SerializeField] private Key navUpAltKey = Key.UpArrow;
+        [Tooltip("Tecla para bajar la selección.")]
+        [SerializeField] private Key navDownKey = Key.S;
+        [Tooltip("Tecla alternativa para bajar la selección.")]
+        [SerializeField] private Key navDownAltKey = Key.DownArrow;
+        [Tooltip("Tecla para confirmar el botón seleccionado (misma acción que el clic).")]
+        [SerializeField] private Key confirmKey = Key.Enter;
+
         private bool confirming; // evita reaccionar a más clics durante la transición
 
         private Camera cam;
         private int currentIndex = -1;
         private Vector3 offset; // desplazamiento de la flecha respecto al botón seleccionado
+        private Vector2 lastMousePos; // para no pisar la selección de teclado con un ratón quieto
 
         private void Awake()
         {
@@ -62,35 +76,90 @@ namespace GameJam.UI
             {
                 offset.x = sideOffset;
             }
+
+            // Punto de partida del ratón: evita que el primer frame cuente como movimiento
+            var mouse = Mouse.current;
+            if (mouse != null) lastMousePos = mouse.position.ReadValue();
         }
 
         private void Update()
         {
             if (buttons == null || buttons.Length == 0 || cam == null) return;
 
+            if (!confirming) HandleKeyboard();
+
             var mouse = Mouse.current;
-            if (mouse == null) return;
+            int hovered = -1;
 
-            // Ratón en pantalla -> mundo (cámara ortográfica: se proyecta al plano z=0)
-            Vector2 screen = mouse.position.ReadValue();
-            Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(screen.x, screen.y, -cam.transform.position.z));
-
-            int hovered = HoveredButton(mouseWorld);
-            if (hovered >= 0)
+            if (mouse != null)
             {
-                currentIndex = hovered;
+                // Ratón en pantalla -> mundo (cámara ortográfica: se proyecta al plano z=0)
+                Vector2 screen = mouse.position.ReadValue();
+                bool mouseMoved = (screen - lastMousePos).sqrMagnitude > 0.01f;
+                lastMousePos = screen;
+
+                Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(screen.x, screen.y, -cam.transform.position.z));
+                hovered = HoveredButton(mouseWorld);
+
+                // Solo el ratón que se mueve cambia la selección: así el teclado no queda pisado
+                if (!confirming && mouseMoved && hovered >= 0)
+                {
+                    currentIndex = hovered;
+                }
             }
 
-            if (currentIndex >= 0 && buttons[currentIndex])
+            UpdateArrowPosition();
+
+            // Clic confirmado sobre un botón: parpadeo rápido y transición
+            if (!confirming && hovered >= 0 && mouse != null && mouse.leftButton.wasPressedThisFrame)
+            {
+                currentIndex = hovered;
+                StartCoroutine(ConfirmSelection(hovered));
+            }
+        }
+
+        // W/S o flechas mueven la selección; Enter confirma (misma ruta que el clic)
+        private void HandleKeyboard()
+        {
+            var keyboard = Keyboard.current;
+            if (keyboard == null) return;
+
+            if (WasPressed(keyboard, navUpKey) || WasPressed(keyboard, navUpAltKey))
+            {
+                MoveSelection(-1);
+            }
+            else if (WasPressed(keyboard, navDownKey) || WasPressed(keyboard, navDownAltKey))
+            {
+                MoveSelection(1);
+            }
+
+            bool confirmPressed = WasPressed(keyboard, confirmKey) ||
+                                  (confirmKey != Key.NumpadEnter && WasPressed(keyboard, Key.NumpadEnter));
+
+            if (confirmPressed && currentIndex >= 0 && currentIndex < buttons.Length)
+            {
+                StartCoroutine(ConfirmSelection(currentIndex));
+            }
+        }
+
+        // Cambia el índice seleccionado con vuelta circular
+        private void MoveSelection(int delta)
+        {
+            int count = buttons.Length;
+            currentIndex = ((currentIndex + delta) % count + count) % count;
+        }
+
+        private static bool WasPressed(Keyboard keyboard, Key key)
+        {
+            return key != Key.None && keyboard[key].wasPressedThisFrame;
+        }
+
+        private void UpdateArrowPosition()
+        {
+            if (currentIndex >= 0 && currentIndex < buttons.Length && buttons[currentIndex])
             {
                 // Aparece directamente sobre el botón seleccionado, sin deslizarse
                 transform.position = buttons[currentIndex].transform.position + offset;
-            }
-
-            // Clic confirmado sobre un botón: parpadeo rápido y transición
-            if (!confirming && hovered >= 0 && mouse.leftButton.wasPressedThisFrame)
-            {
-                StartCoroutine(ConfirmSelection(hovered));
             }
         }
 

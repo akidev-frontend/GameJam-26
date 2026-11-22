@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9124666372671166133}
   - component: {fileID: 2273921607934195215}
   - component: {fileID: 5830998337002044069}
+  - component: {fileID: 7023080839742394176}
   m_Layer: 0
   m_Name: Xuxo
   m_TagString: Untagged
@@ -155,3 +156,24 @@ MonoBehaviour:
   frequency: 1.2
   phase: 0
   randomizePhase: 1
+--- !u!114 &7023080839742394176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957963783615759413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bab34bb3eaec8c369d111a55da55c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.Level.XuxoPickup
+  desaparecerAlComer: 1
+  esXuxoMalo: 0
+  spawnPoint: {fileID: 0}
+  deathDuration: 0.9
+  respawnFreeze: 0.1
+  eatAnimationDuration: 0.5
+  waitAfterAnimation: 0.4
+  fadeDuration: 0.8
+  nextScene: 

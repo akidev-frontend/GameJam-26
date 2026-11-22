@@ -19,6 +19,11 @@ namespace GameJam.UI
         [SerializeField] private float marginX = 0.04f;
         [SerializeField] private float marginY = 0.95f;
 
+        [Tooltip("Cartel de fondo. Si está vacío se busca 'PosterContadorXuxo'. Con cartel, el texto se ancla a él.")]
+        [SerializeField] private Transform poster;
+        [Tooltip("Margen horizontal (unidades de mundo) desde el borde izquierdo del cartel.")]
+        [SerializeField] private float posterPadding = 0.25f;
+
         // Contador de xiuxos comidos; sobrevive a los cambios de escena.
         private static int eaten;
         // Último nivel visto; si volvemos atrás (o reiniciamos la partida),
@@ -30,11 +35,19 @@ namespace GameJam.UI
 
         private Camera mainCamera;
         private TextMesh textMesh;
+        private SpriteRenderer posterRenderer;
 
         private void Awake()
         {
             textMesh = GetComponent<TextMesh>();
             mainCamera = Camera.main;
+
+            // El texto se pega al cartel para quedar siempre encima de él
+            // (el cartel es unlit: se ve también en niveles a oscuras).
+            if (poster == null)
+                poster = GameObject.Find("PosterContadorXuxo")?.transform;
+            if (poster != null)
+                posterRenderer = poster.GetComponent<SpriteRenderer>();
 
             // Si volvemos a un nivel igual o anterior al último visto (reinicio
             // de partida, volver al menú y empezar de nuevo...), el contador
@@ -58,7 +71,18 @@ namespace GameJam.UI
 
         private void LateUpdate()
         {
-            // Anclado a la esquina superior izquierda de la cámara, por si esta se mueve.
+            // Si hay cartel, el texto se alinea dentro de él. El cartel no lleva
+            // script: queda fijo, así que el HUD tampoco se mueve con la cámara.
+            if (poster)
+            {
+                float leftEdge = posterRenderer
+                    ? poster.position.x - posterRenderer.bounds.extents.x
+                    : poster.position.x;
+                transform.position = new Vector3(leftEdge + posterPadding, poster.position.y, transform.position.z);
+                return;
+            }
+
+            // Sin cartel: anclado a la esquina superior izquierda de la cámara.
             if (!mainCamera) mainCamera = Camera.main;
             if (!mainCamera) return;
 

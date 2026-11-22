@@ -54,11 +54,30 @@ namespace GameJam.Player
         [Tooltip("Multiplica el input horizontal. Nivel 2 lo pone a -1 para invertir los controles.")]
         [SerializeField] private float inputScale = 1f;
 
+        [Header("Sonido")]
+        [Tooltip("AudioSource 2D del jugador para sus efectos.")]
+        [SerializeField] private AudioSource sfxSource;
+        [Tooltip("Clip que suena cada vez que el personaje muere.")]
+        [SerializeField] private AudioClip deathSfx;
+
         public bool IsGrounded { get; private set; }
         public float InputScale
         {
             get => inputScale;
             set => inputScale = value;
+        }
+
+        /// <summary>
+        /// Reproduce el sonido de muerte. Lo llama PlayerDeathFlow en cada muerte.
+        /// </summary>
+        public void PlayDeathSound()
+        {
+            if (deathSfx == null) return;
+
+            if (sfxSource != null)
+                sfxSource.PlayOneShot(deathSfx);
+            else
+                AudioSource.PlayClipAtPoint(deathSfx, transform.position);
         }
 
         private Rigidbody2D rb;

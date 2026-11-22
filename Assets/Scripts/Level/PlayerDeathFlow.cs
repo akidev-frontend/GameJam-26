@@ -23,6 +23,7 @@ namespace GameJam.Level
             if (controller) controller.InputScale = 0f;
             if (rb) rb.linearVelocity = Vector2.zero;
             if (animator) animator.PlayDeath();
+            if (controller) controller.PlayDeathSound();
 
             if (deathDuration > 0f)
                 yield return new WaitForSeconds(deathDuration);
