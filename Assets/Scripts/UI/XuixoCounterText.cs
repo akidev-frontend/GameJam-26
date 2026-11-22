@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameJam.UI
 {
@@ -58,9 +59,13 @@ namespace GameJam.UI
                 eaten = 0;
             lastSceneIndex = sceneIndex;
 
-            // El nivel N corresponde a N-2 xiuxos ya comidos al entrar; evita
-            // que reiniciar un nivel o saltarse uno deje el contador por detrás.
-            int baseline = Mathf.Max(0, sceneIndex - 2);
+            // El contador es acumulativo y por nivel: el Level1 no suma, así que
+            // al entrar en el Level2 debe marcar 0 (y pasar a 1 al comer el
+            // xuixo), en el Level3 marcar 1 (y pasar a 2), en el Level4 marcar 2
+            // (y pasar a 3), etc. No se usa el buildIndex directamente porque
+            // antes de los niveles hay escenas que no son nivel (Inicio, MainMenu).
+            int levelPosition = CountLevelsUpTo(sceneIndex);
+            int baseline = Mathf.Max(0, levelPosition - 2);
             if (eaten < baseline) eaten = baseline;
 
             Refresh();
@@ -101,6 +106,24 @@ namespace GameJam.UI
 
         /// <summary>Reinicia el contador (p. ej. al volver al menú principal).</summary>
         public static void ResetCounter() => eaten = 0;
+
+        /// <summary>
+        /// Posición (desde 1) de la escena entre las escenas de nivel, contando
+        /// solo las que están en Assets/Scenes/Levels. Devuelve 0 si la escena
+        /// no es un nivel (menú, inicio...).
+        /// </summary>
+        private static int CountLevelsUpTo(int buildIndex)
+        {
+            int count = 0;
+            int total = SceneManager.sceneCountInBuildSettings;
+            for (int i = 0; i <= buildIndex && i < total; i++)
+            {
+                string path = SceneUtility.GetScenePathByBuildIndex(i);
+                if (path.Contains("/Levels/")) count++;
+            }
+            return count;
+        }
+
 
         private void Refresh()
         {

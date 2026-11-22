@@ -1267,6 +1267,7 @@ GameObject:
   - component: {fileID: 1193302036}
   - component: {fileID: 1193302035}
   - component: {fileID: 1193302034}
+  - component: {fileID: 1193302038}
   m_Layer: 0
   m_Name: ContadorXuxo
   m_TagString: Untagged
@@ -1372,6 +1373,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1193302038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193302032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110c5f59ebbf57ecb82ba5c17e050550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.UI.XuixoCounterText
+  totalPieces: 6
+  marginX: 0.04
+  marginY: 0.95
+  poster: {fileID: 0}
+  posterPadding: 0.25
 --- !u!1 &1267466680
 GameObject:
   m_ObjectHideFlags: 0
