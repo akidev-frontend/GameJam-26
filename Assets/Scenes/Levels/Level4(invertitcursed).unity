@@ -1811,6 +1811,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Level.XuxoPickup
   desaparecerAlComer: 1
+  eatAnimationDuration: 0.5
+  waitAfterAnimation: 0.4
+  fadeDuration: 0.8
+  nextScene: 
 --- !u!1 &1399631860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,6 +2894,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Level.XuxoPickup
   desaparecerAlComer: 1
+  eatAnimationDuration: 0.5
+  waitAfterAnimation: 0.4
+  fadeDuration: 0.8
+  nextScene: 
 --- !u!1001 &6574905668728071540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2963,6 +2971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6890424188964894233, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
+      propertyPath: xuixoHeldSprite
+      value: 
+      objectReference: {fileID: 1959287876745339548, guid: fb4cbcbc97b3507f9b9c73af0e937dce, type: 3}
     - target: {fileID: 7692800834238062067, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.47
