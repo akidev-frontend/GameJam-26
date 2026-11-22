@@ -34,11 +34,27 @@ namespace GameJam.UI
         [Tooltip("Segundos de negro antes de cambiar de escena.")]
         [SerializeField] private float endDelay = 0.5f;
 
+        [Header("Música")]
+        [Tooltip("Música que suena durante la secuencia. Si está vacía se usa el AudioSource de este mismo objeto. Su volumen se desvanece con el fundido final.")]
+        [SerializeField] private AudioSource music;
+
         [Tooltip("Se dispara cuando ya se han mostrado todas las viñetas.")]
         public UnityEvent onFinish;
 
+        // Volumen inicial de la música para poder desvanecerlo hasta 0.
+        private float musicStartVolume = 1f;
+
         private void Awake()
         {
+            if (music == null) music = GetComponent<AudioSource>();
+            if (music != null)
+            {
+                music.loop = true;
+                music.playOnAwake = false;
+                music.spatialBlend = 0f; // 2D
+                musicStartVolume = music.volume;
+            }
+
             // Todas las viñetas empiezan invisibles sobre el fondo negro
             if (panels == null) return;
             foreach (var panel in panels)
@@ -47,6 +63,7 @@ namespace GameJam.UI
 
         private void Start()
         {
+            if (music != null) music.Play();
             StartCoroutine(Play());
         }
 
@@ -74,6 +91,9 @@ namespace GameJam.UI
 
             // Fundido de salida: toda la página se va a negro a la vez
             yield return FadeAll(1f, 0f);
+
+            // La música ya está a 0 y se detiene antes de cambiar de escena
+            if (music != null) music.Stop();
 
             if (endDelay > 0f) yield return new WaitForSeconds(endDelay);
 
@@ -105,6 +125,7 @@ namespace GameJam.UI
             if (endFadeDuration <= 0f)
             {
                 foreach (var panel in panels) if (panel != null) SetAlpha(panel, to);
+                if (music != null) music.volume = 0f;
                 yield break;
             }
 
@@ -115,9 +136,13 @@ namespace GameJam.UI
                 float k = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t / endFadeDuration));
                 float alpha = Mathf.Lerp(from, to, k);
                 foreach (var panel in panels) if (panel != null) SetAlpha(panel, alpha);
+
+                // La música se apaga al mismo ritmo que la imagen
+                if (music != null) music.volume = Mathf.Lerp(musicStartVolume, 0f, k);
                 yield return null;
             }
             foreach (var panel in panels) if (panel != null) SetAlpha(panel, to);
+            if (music != null) music.volume = 0f;
         }
 
         private static void SetAlpha(SpriteRenderer renderer, float alpha)

@@ -116,9 +116,19 @@ namespace GameJam.Player
             held.transform.SetParent(transform, false);
             xuixoHeld = held.AddComponent<SpriteRenderer>();
             xuixoHeld.sprite = xuixoHeldSprite;
-            xuixoHeld.sortingOrder = 15; // por delante del jugador
             xuixoHeld.enabled = false;
             ApplyXuixoTransform();
+        }
+
+        // El xuixo debe ir siempre justo delante del sprite del jugador,
+        // aunque el nivel cambie su SortingOrder (Level4.5 y Level6 lo hacen).
+        private void ApplySorting()
+        {
+            if (xuixoHeld == null) return;
+            if (spriteRenderer == null) return;
+
+            xuixoHeld.sortingLayerID = spriteRenderer.sortingLayerID;
+            xuixoHeld.sortingOrder = spriteRenderer.sortingOrder + 1;
         }
 
         // Aplica offset y escala; se llama también cada frame mientras el xuixo
@@ -128,6 +138,7 @@ namespace GameJam.Player
             if (xuixoHeld == null) return;
             xuixoHeld.transform.localPosition = xuixoOffset;
             xuixoHeld.transform.localScale = Vector3.one * xuixoScale;
+            ApplySorting();
         }
 
         private void LateUpdate()
