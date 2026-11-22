@@ -42,6 +42,17 @@ namespace GameJam.Level
             eaten = true;
             GameJam.UI.XuixoCounterText.NotifyEaten();
 
+            // Congelar al player donde esté (incluso en el aire) mientras come:
+            // sin control y sin física (ni gravedad ni movimiento).
+            var playerRb = other.attachedRigidbody;
+            var controller = other.GetComponent<GameJam.Player.PlayerController2D>();
+            if (controller) controller.InputScale = 0f;
+            if (playerRb)
+            {
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.simulated = false;
+            }
+
             var animator = other.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
             if (animator) animator.PlayXuxo();
 
