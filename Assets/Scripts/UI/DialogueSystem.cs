@@ -59,6 +59,17 @@ namespace GameJam.UI
             Play();
         }
 
+        /// <summary>Detiene la secuencia y vacía el texto inmediatamente.</summary>
+        public void Vaciar()
+        {
+            if (routine != null)
+            {
+                StopCoroutine(routine);
+                routine = null;
+            }
+            if (targetText) targetText.text = string.Empty;
+        }
+
         private IEnumerator PlayRoutine()
         {
             if (!targetText) yield break;
