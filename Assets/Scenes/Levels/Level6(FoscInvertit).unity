@@ -360,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &208960325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,7 +1491,7 @@ Transform:
   m_GameObject: {fileID: 1023301501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09999943, y: 10.960001, z: 0}
+  m_LocalPosition: {x: -5.16, y: 10.960001, z: 0}
   m_LocalScale: {x: 1.3539559, y: 0.4589681, z: 0.4589681}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   eatAnimationDuration: 0.5
   waitAfterAnimation: 0.4
   fadeDuration: 0.8
-  nextScene: 
+  nextScene: Final
 --- !u!1 &1383123044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,6 +2394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.UI.XuixoCounterText
   totalPieces: 6
+  anchor: 0
   marginX: 0.04
   marginY: 0.95
   poster: {fileID: 0}
@@ -2490,7 +2491,7 @@ Transform:
   m_GameObject: {fileID: 1640019512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.39, y: 10.97, z: 0}
+  m_LocalPosition: {x: -8.63, y: 10.97, z: 0}
   m_LocalScale: {x: 0.4511989, y: 0.6445699, z: 0.6445699}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2766,21 +2767,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[0]'
+      value: NOOOO
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[1]'
+      value: HIJO P*TA
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[2]'
+      value: "\xA1\xBFCOMO SIGUES VIVO?!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[3]'
+      value: "TE VOY A DAR UN PISOT\xD3N QUE TE VOY A DEJAR COMO UN CROISSANT PLANO"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lineDurations.Array.data[0]'
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lineDurations.Array.data[1]'
+      value: 0.51
+      objectReference: {fileID: 0}
     - target: {fileID: 3191012756983478395, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_Name
       value: DialogueText
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.56961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75948
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75948
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.98
+      value: -4.5994
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.58
+      value: -1.45
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.63
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2810,9 +2847,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8220558527670039641, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 79a7ca560a89d259b8f3e183eb6c50e2, type: 3}
     - target: {fileID: 8715403106399898805, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_Color.rgba
-      value: 4294967295
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2841,7 +2882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7123036951008164722, guid: 3b51a78f46be66fe5b25f18259487a8f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.71
+      value: 3.85
       objectReference: {fileID: 0}
     - target: {fileID: 7123036951008164722, guid: 3b51a78f46be66fe5b25f18259487a8f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2956,6 +2997,22 @@ PrefabInstance:
     - target: {fileID: 2359595655954211231, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
       propertyPath: m_SortingOrder
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553463388106589351, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
+      propertyPath: jumpKey
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553463388106589351, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
+      propertyPath: inputScale
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553463388106589351, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
+      propertyPath: jumpAltKey
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553463388106589351, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
+      propertyPath: useSpaceKey
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6609298086982907529, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
       propertyPath: m_Name

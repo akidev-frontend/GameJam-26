@@ -62,6 +62,9 @@ namespace GameJam.UI
         /// <summary>True mientras se está escribiendo la línea actual carácter a carácter.</summary>
         public bool IsTyping => typing;
 
+        /// <summary>True mientras la secuencia del diálogo está en marcha (escribiendo o esperando entre líneas).</summary>
+        public bool IsPlaying { get; private set; }
+
         [Header("Evento")]
         [Tooltip("Se dispara cuando la secuencia completa termina (tras el hold de la última línea). No se dispara si loop está activo ni si se corta con Vaciar().")]
         public UnityEvent onFinish;
@@ -163,6 +166,7 @@ namespace GameJam.UI
         /// <summary>Detiene la secuencia y vacía el texto inmediatamente.</summary>
         public void Vaciar()
         {
+            IsPlaying = false;
             if (routine != null)
             {
                 StopCoroutine(routine);
@@ -172,10 +176,18 @@ namespace GameJam.UI
             if (voiceSource) voiceSource.Stop();
         }
 
+        /// <summary>Detiene el diálogo y oculta también el cuadro y el texto.</summary>
+        public void Ocultar()
+        {
+            Vaciar();
+            SetAlpha(0f);
+        }
+
         private IEnumerator PlayRoutine()
         {
             if (!targetText) yield break;
 
+            IsPlaying = true;
             targetText.text = string.Empty;
 
             // El cuadro y el texto empiezan invisibles y aparecen con un fundido,
@@ -223,6 +235,8 @@ namespace GameJam.UI
                 if (!loop) onFinish?.Invoke();
             }
             while (loop);
+
+            IsPlaying = false;
         }
 
         private IEnumerator TypeLine(string line)

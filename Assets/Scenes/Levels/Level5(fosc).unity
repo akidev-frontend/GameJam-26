@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &810694835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1509,6 +1509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.UI.XuixoCounterText
   totalPieces: 6
+  anchor: 0
   marginX: 0.04
   marginY: 0.95
   poster: {fileID: 0}
@@ -2592,21 +2593,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[0]'
+      value: HUUUHHHH.....
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: 'lines.Array.data[1]'
+      value: "ME EST\xC1S EMPEZANDO A TOCAR LOS KINDER SORPRESA!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730899467276636789, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: lineDurations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3191012756983478395, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_Name
       value: DialogueText
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.59784746
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.79713
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.79713
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.98
+      value: -4.8155
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.58
+      value: -1.51
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.63
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3710357832064225007, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2636,9 +2665,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8220558527670039641, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 68b6d32831f538d43af51904509b4e8d, type: 3}
     - target: {fileID: 8715403106399898805, guid: 9ac31ad120a95fae98529415c3625c21, type: 3}
       propertyPath: m_Color.rgba
-      value: 4294967295
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -80,6 +80,9 @@ namespace GameJam.Level
             eaten = true;
             GameJam.UI.XuixoCounterText.NotifyEaten();
 
+            // Sonido de comer (global, definido en el prefab del Player)
+            if (controller) controller.PlayEatSound();
+
             // Congelar al player donde esté (incluso en el aire) mientras come:
             // sin control y sin física (ni gravedad ni movimiento).
             var playerRb = other.attachedRigidbody;
