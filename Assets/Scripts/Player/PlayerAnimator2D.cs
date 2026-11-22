@@ -21,7 +21,7 @@ namespace GameJam.Player
         [Tooltip("Posición local del xuixo respecto al jugador (por encima de la cabeza).")]
         [SerializeField] private Vector2 xuixoOffset = new Vector2(0.00f, 0.17f);
         [Tooltip("Escala local del xuixo sostenido.")]
-        [SerializeField] private float xuixoScale = 0.30f;
+        [SerializeField] private float xuixoScale = 1f;
 
         private Rigidbody2D rb;
         private Animator animator;
