@@ -38,9 +38,15 @@ namespace GameJam.UI
         [Header("Audio")]
         [Tooltip("Audio opcional que suena cuando empieza a escribirse el texto; se corta con Vaciar().")]
         [SerializeField] private AudioSource voiceSource;
+        [Tooltip("Elemento (1 = primera línea) en el que empieza a sonar el audio, justo al comenzar a teclearse esa línea.")]
+        [SerializeField, Min(1)] private int voiceStartLine = 1;
 
         private TextMesh targetText;
         private Coroutine routine;
+        private bool typing;
+
+        /// <summary>True mientras se está escribiendo la línea actual carácter a carácter.</summary>
+        public bool IsTyping => typing;
 
         private void Awake()
         {
@@ -67,6 +73,13 @@ namespace GameJam.UI
             Play();
         }
 
+        /// <summary>Inicia el diálogo con líneas nuevas y su duración por línea.</summary>
+        public void Play(string[] newLines, float[] durations)
+        {
+            if (durations != null) lineDurations = durations;
+            Play(newLines);
+        }
+
         /// <summary>Detiene la secuencia y vacía el texto inmediatamente.</summary>
         public void Vaciar()
         {
@@ -86,13 +99,20 @@ namespace GameJam.UI
             targetText.text = string.Empty;
             if (startDelay > 0f) yield return new WaitForSeconds(startDelay);
 
-            // El texto empieza: suena el audio opcional.
-            if (voiceSource) voiceSource.Play();
+            // El audio arranca al empezar a teclearse la línea elegida.
+            int voiceStartIndex = Mathf.Clamp(voiceStartLine - 1, 0, Mathf.Max(0, lines.Length - 1));
+            bool voicePlayed = false;
 
             do
             {
                 for (int i = 0; i < lines.Length; i++)
                 {
+                    if (!voicePlayed && i == voiceStartIndex)
+                    {
+                        voicePlayed = true;
+                        if (voiceSource) voiceSource.Play();
+                    }
+
                     yield return TypeLine(lines[i] ?? string.Empty);
 
                     float hold = (lineDurations != null && i < lineDurations.Length)
@@ -111,17 +131,25 @@ namespace GameJam.UI
             float cps = Mathf.Max(1f, charsPerSecond);
             float accumulated = 0f;
             int shown = 0;
+            typing = true;
 
-            while (shown < line.Length)
+            try
             {
-                accumulated += Time.deltaTime * cps;
-                int count = Mathf.Min(line.Length, Mathf.FloorToInt(accumulated));
-                if (count != shown)
+                while (shown < line.Length)
                 {
-                    shown = count;
-                    targetText.text = line.Substring(0, shown);
+                    accumulated += Time.deltaTime * cps;
+                    int count = Mathf.Min(line.Length, Mathf.FloorToInt(accumulated));
+                    if (count != shown)
+                    {
+                        shown = count;
+                        targetText.text = line.Substring(0, shown);
+                    }
+                    yield return null;
                 }
-                yield return null;
+            }
+            finally
+            {
+                typing = false;
             }
         }
 
