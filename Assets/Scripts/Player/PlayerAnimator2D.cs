@@ -114,17 +114,33 @@ namespace GameJam.Player
 
             var held = new GameObject("XuixoEnMano");
             held.transform.SetParent(transform, false);
-            held.transform.localPosition = xuixoOffset;
-            held.transform.localScale = Vector3.one * xuixoScale;
             xuixoHeld = held.AddComponent<SpriteRenderer>();
             xuixoHeld.sprite = xuixoHeldSprite;
             xuixoHeld.sortingOrder = 15; // por delante del jugador
             xuixoHeld.enabled = false;
+            ApplyXuixoTransform();
+        }
+
+        // Aplica offset y escala; se llama también cada frame mientras el xuixo
+        // está visible para que los cambios del Inspector se vean en vivo.
+        private void ApplyXuixoTransform()
+        {
+            if (xuixoHeld == null) return;
+            xuixoHeld.transform.localPosition = xuixoOffset;
+            xuixoHeld.transform.localScale = Vector3.one * xuixoScale;
+        }
+
+        private void LateUpdate()
+        {
+            if (xuixoHeld != null && xuixoHeld.enabled)
+                ApplyXuixoTransform();
         }
 
         private void SetXuixoHeldVisible(bool visible)
         {
-            if (xuixoHeld != null) xuixoHeld.enabled = visible;
+            if (xuixoHeld == null) return;
+            ApplyXuixoTransform();
+            xuixoHeld.enabled = visible;
         }
     }
 }
