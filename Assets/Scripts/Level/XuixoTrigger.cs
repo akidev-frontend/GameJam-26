@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,22 +20,6 @@ namespace GameJam.Level
         {
             "¡Regla rota!",
             "A partir de ahora todo cambia.",
-        };
-
-        [System.Serializable]
-        public class PasoDialogo
-        {
-            [TextArea] public string texto = "...";
-            [Tooltip("Segundos que se muestra este texto antes del siguiente.")]
-            public float duracion = 1.5f;
-        }
-
-        [Header("Secuencia de texto")]
-        [Tooltip("Frases que se muestran en orden; cada una dura 'duracion' segundos.")]
-        [SerializeField] private List<PasoDialogo> pasos = new()
-        {
-            new PasoDialogo { texto = "...", duracion = 1.5f },
-            new PasoDialogo { texto = "Regla cambiada.", duracion = 2f },
         };
 
         [Header("Objetos")]
@@ -97,8 +79,7 @@ namespace GameJam.Level
 
             if (dialogue != null)
             {
-                dialogue.Vaciar();
-                StartCoroutine(PlayDialogueSequence());
+                PlayDialogue();
             }
             else
             {
@@ -133,18 +114,16 @@ namespace GameJam.Level
         }
 
         /// <summary>
-        /// Muestra cada paso de la secuencia en orden, esperando su duración.
+        /// Dispara el diálogo asignado una sola vez: el texto y su voz viven
+        /// en el propio DialogueSystem del objeto (líneas, duraciones y audio),
+        /// de modo que cualquier DialogueText se puede duplicar y recablear
+        /// sin tocar este trigger.
         /// </summary>
-        private IEnumerator PlayDialogueSequence()
+        private void PlayDialogue()
         {
-            if (!dialogue) yield break;
-
-            foreach (var paso in pasos)
-            {
-                if (paso == null) continue;
-                dialogue.Play(new[] { paso.texto });
-                yield return new WaitForSeconds(paso.duracion);
-            }
+            if (!dialogue) return;
+            dialogue.Vaciar();
+            dialogue.Play();
         }
     }
 }
