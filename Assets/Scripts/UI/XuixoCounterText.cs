@@ -21,6 +21,9 @@ namespace GameJam.UI
 
         // Contador de xiuxos comidos; sobrevive a los cambios de escena.
         private static int eaten;
+        // Último nivel visto; si volvemos atrás (o reiniciamos la partida),
+        // el contador vuelve a 0.
+        private static int lastSceneIndex = -1;
 
         private static readonly System.Collections.Generic.List<XuixoCounterText> instances =
             new System.Collections.Generic.List<XuixoCounterText>();
@@ -33,9 +36,18 @@ namespace GameJam.UI
             textMesh = GetComponent<TextMesh>();
             mainCamera = Camera.main;
 
+            // Si volvemos a un nivel igual o anterior al último visto (reinicio
+            // de partida, volver al menú y empezar de nuevo...), el contador
+            // se resetea. Ojo: los statics persisten entre sesiones de Play en
+            // el editor, por eso esto es necesario también aquí.
+            int sceneIndex = gameObject.scene.buildIndex;
+            if (lastSceneIndex >= 0 && sceneIndex <= lastSceneIndex)
+                eaten = 0;
+            lastSceneIndex = sceneIndex;
+
             // El nivel N corresponde a N-2 xiuxos ya comidos al entrar; evita
             // que reiniciar un nivel o saltarse uno deje el contador por detrás.
-            int baseline = Mathf.Max(0, gameObject.scene.buildIndex - 2);
+            int baseline = Mathf.Max(0, sceneIndex - 2);
             if (eaten < baseline) eaten = baseline;
 
             Refresh();

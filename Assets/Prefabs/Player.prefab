@@ -246,6 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Player.PlayerAnimator2D
   speedThreshold: 0.05
   facesRight: 1
+  xuixoHeldSprite: {fileID: 0}
+  xuixoOffset: {x: 0.03, y: 0.08}
 --- !u!95 &4741683347467352737
 Animator:
   serializedVersion: 7

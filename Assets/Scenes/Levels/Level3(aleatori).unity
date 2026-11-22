@@ -2328,7 +2328,7 @@ PrefabInstance:
     - target: {fileID: 6890424188964894233, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
       propertyPath: xuixoHeldSprite
       value: 
-      objectReference: {fileID: 1959287876745339548, guid: fb4cbcbc97b3507f9b9c73af0e937dce, type: 3}
+      objectReference: {fileID: -8200787528238950913, guid: 2473d2833f6240819b5221e9b52d51a0, type: 3}
     - target: {fileID: 7692800834238062067, guid: 8b90f5228587d4b03a9b0aabae0dff18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8
