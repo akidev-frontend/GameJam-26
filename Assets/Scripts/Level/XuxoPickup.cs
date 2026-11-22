@@ -5,16 +5,30 @@ using GameJam.UI;
 namespace GameJam.Level
 {
     /// <summary>
-    /// Xuixo comestible: cuando el Player toca el collider (trigger), suma 1 al
-    /// contador global de xiuxos comidos, el jugador celebra (animación RataXuxo
-    /// con el xuixo en la mano) y, al acabar la animación, espera unos decimales,
-    /// hace fundido a negro y carga el nivel siguiente.
+    /// Xuixo comestible. Bueno: suma 1 al contador global de xiuxos comidos, el
+    /// jugador celebra (RataXuxo con el xuixo en la mano) y, al acabar, espera
+    /// unos decimales, fundido a negro y nivel siguiente.
+    /// Malo: mata (animación de muerte + respawn en el SpawnPoint), no suma y no
+    /// avanza de nivel.
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public class XuxoPickup : MonoBehaviour
     {
         [Tooltip("Si está activo, el xuixo desaparece al comérselo.")]
         [SerializeField] private bool desaparecerAlComer = true;
+
+        [Header("Xuixo malo")]
+        [Tooltip("Marca este xuixo como malo: al tocarlo mueres y reapareces en el SpawnPoint. También se detecta si el objeto se llama '*malo*'.")]
+        [SerializeField] private bool esXuxoMalo;
+
+        [Tooltip("Punto de reaparición del xuixo malo; vacío = busca 'SpawnPoint'.")]
+        [SerializeField] private Transform spawnPoint;
+
+        [Tooltip("Duración de la animación de muerte antes de reaparecer.")]
+        [SerializeField] private float deathDuration = 0.9f;
+
+        [Tooltip("Segundos de control bloqueado tras reaparecer.")]
+        [SerializeField] private float respawnFreeze = 0.1f;
 
         [Header("Transición al siguiente nivel")]
         [Tooltip("Duración de la animación de comer (clip RataXuxo: 3 frames a 6 fps = 0,5 s).")]
@@ -28,16 +42,40 @@ namespace GameJam.Level
 
         private bool eaten;
 
+        /// <summary>True si este xuixo es de los que matan.</summary>
+        public bool EsMalo => esXuxoMalo || gameObject.name.ToLowerInvariant().Contains("malo");
+
         private void Reset()
         {
             var col = GetComponent<Collider2D>();
             if (col) col.isTrigger = true;
         }
 
+        private void Awake()
+        {
+            if (spawnPoint == null)
+                spawnPoint = GameObject.Find("SpawnPoint")?.transform;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (eaten) return;
-            if (!other.GetComponent<GameJam.Player.PlayerController2D>()) return;
+            var controller = other.GetComponent<GameJam.Player.PlayerController2D>();
+            if (controller == null) return;
+
+            if (EsMalo)
+            {
+                // Xuixo malo: muerte + respawn. No suma y no avanza de nivel.
+                var animator = other.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
+                StartCoroutine(PlayerDeathFlow.Run(
+                    other.transform, controller, animator, other.attachedRigidbody,
+                    spawnPoint ? spawnPoint.position : Vector3.zero,
+                    deathDuration, respawnFreeze));
+
+                // Se consume también (si no, morirías en bucle sobre el spawn).
+                if (desaparecerAlComer) OcultarXuixo();
+                return;
+            }
 
             eaten = true;
             GameJam.UI.XuixoCounterText.NotifyEaten();
@@ -45,7 +83,6 @@ namespace GameJam.Level
             // Congelar al player donde esté (incluso en el aire) mientras come:
             // sin control y sin física (ni gravedad ni movimiento).
             var playerRb = other.attachedRigidbody;
-            var controller = other.GetComponent<GameJam.Player.PlayerController2D>();
             if (controller) controller.InputScale = 0f;
             if (playerRb)
             {
@@ -53,18 +90,21 @@ namespace GameJam.Level
                 playerRb.simulated = false;
             }
 
-            var animator = other.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
-            if (animator) animator.PlayXuxo();
+            var playerAnimator = other.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
+            if (playerAnimator) playerAnimator.PlayXuxo();
 
             // Ojo: no usar SetActive(false) aquí, mataría la corrutina de abajo.
-            // Ocultar el xuixo apagando renderer y collider.
-            if (desaparecerAlComer)
-            {
-                foreach (var r in GetComponentsInChildren<SpriteRenderer>()) r.enabled = false;
-                foreach (var c in GetComponentsInChildren<Collider2D>()) c.enabled = false;
-            }
+            if (desaparecerAlComer) OcultarXuixo();
 
             StartCoroutine(AdvanceLevel());
+        }
+
+        // Ocultar el xuixo apagando renderer y collider (sin desactivar el GO,
+        // para no matar corrutinas en curso).
+        private void OcultarXuixo()
+        {
+            foreach (var r in GetComponentsInChildren<SpriteRenderer>()) r.enabled = false;
+            foreach (var c in GetComponentsInChildren<Collider2D>()) c.enabled = false;
         }
 
         private System.Collections.IEnumerator AdvanceLevel()

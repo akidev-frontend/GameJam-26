@@ -19,10 +19,7 @@ namespace GameJam.Level
         [Tooltip("Segundos que el control queda bloqueado tras reaparecer.")]
         [SerializeField] private float respawnFreeze = 0.1f;
 
-        private Transform player;
-        private Rigidbody2D playerRb;
-
-        private void Reset()
+        private Rigidbody2D playerRb;        private void Reset()
         {
             if (TryGetComponent(out Collider2D col)) col.isTrigger = true;
         }
@@ -50,43 +47,13 @@ namespace GameJam.Level
 
         private void Die(Transform victim, GameJam.Player.PlayerController2D controller2D)
         {
-            player = victim;
-            if (!playerRb) player.TryGetComponent(out playerRb);
+            if (!playerRb) victim.TryGetComponent(out playerRb);
 
-            var animator = player.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
-            StartCoroutine(RespawnRoutine(victim, controller2D, animator, spawnPoint ? spawnPoint.position : Vector3.zero));
-        }
-
-        private System.Collections.IEnumerator RespawnRoutine(
-            Transform victim,
-            GameJam.Player.PlayerController2D controller2D,
-            GameJam.Player.PlayerAnimator2D animator,
-            Vector3 target)
-        {
-            // Congelar controles y frenar al player durante la animación de muerte
-            float scale = controller2D ? controller2D.InputScale : 1f;
-            if (controller2D) controller2D.InputScale = 0f;
-            if (playerRb) playerRb.linearVelocity = Vector2.zero;
-            if (animator) animator.PlayDeath();
-
-            // Esperar a que termine la animación de muerte...
-            if (deathDuration > 0f)
-                yield return new WaitForSeconds(deathDuration);
-
-            // ...y reaparecer en el SpawnPoint
-            if (playerRb)
-            {
-                playerRb.position = target;
-                playerRb.linearVelocity = Vector2.zero;
-            }
-            if (victim) victim.position = target;
-            if (animator) animator.OnRespawned();
-
-            // Breve congelación extra tras reaparecer
-            if (respawnFreeze > 0f)
-                yield return new WaitForSeconds(respawnFreeze);
-            if (controller2D) controller2D.InputScale = scale;
-            player = null;
+            var animator = victim.GetComponentInParent<GameJam.Player.PlayerAnimator2D>();
+            StartCoroutine(PlayerDeathFlow.Run(
+                victim, controller2D, animator, playerRb,
+                spawnPoint ? spawnPoint.position : Vector3.zero,
+                deathDuration, respawnFreeze));
         }
     }
 }
