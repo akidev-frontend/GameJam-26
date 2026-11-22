@@ -15,8 +15,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level2(normal).unity
     guid: 20aa75ff460ea75ad94767477a32e732
   - enabled: 1
-    path: Assets/Scenes/Levels/Level4.unity
-    guid: edb03422cd5d41eeb8955b09e67339fd
+    path: Assets/Scenes/Levels/Level3(aleatori).unity
+    guid: a350dbb365ed09c4a81c5ecf23ab74e9
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level4(invertitcursed).unity
+    guid: 02eea72af67c6a74787709b3280cae09
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level4.5(InvertitAmbTemps).unity
+    guid: cee4624164d9a4acd9c356027b536f65
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level5(fosc).unity
+    guid: 99e1747f04889ef46ae25b21d3444abb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level6(FoscInvertit).unity
+    guid: 895745a27b1aa7ffd94401b7249ee646
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
