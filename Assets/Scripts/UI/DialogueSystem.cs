@@ -21,7 +21,7 @@ namespace GameJam.UI
         };
 
         [Header("Ajustes")]
-        [Tooltip("Segundos de espera antes de empezar a escribir.")]
+        [Tooltip("Segundos de espera antes de empezar a escribir, además del fundido de entrada de la escena.")]
         [SerializeField] private float startDelay = 1.2f;
         [Tooltip("Caracteres escritos por segundo.")]
         [SerializeField] private float charsPerSecond = 30f;
@@ -35,6 +35,19 @@ namespace GameJam.UI
         [SerializeField] private bool loop;
         [Tooltip("Si está desactivado, no se reproduce al iniciar (se lanza manualmente con Play).")]
         [SerializeField] private bool playOnStart = true;
+
+        [Header("Cuadro de fondo")]
+        [Tooltip("Cuadro que va detrás del texto. Si está vacío se coge el primer SpriteRenderer hijo (el 'texto_0').")]
+        [SerializeField] private SpriteRenderer background;
+        [Tooltip("Margen entre el borde izquierdo del cuadro y el inicio del texto (unidades de mundo). " +
+                 "Evita que las frases se peguen o se salgan del borde aunque redimensiones el cuadro.")]
+        [SerializeField] private float textLeftMargin = 1.5f;
+
+        [Header("Fundido de entrada")]
+        [Tooltip("Si está activo, el diálogo espera a que termine el fundido de entrada de la escena (FadeIn) y luego aparece.")]
+        [SerializeField] private bool waitForSceneFade = true;
+        [Tooltip("Segundos que tardan en aparecer el cuadro y el texto al empezar el diálogo. 0 = aparecen de golpe.")]
+        [SerializeField] private float fadeInDuration = 0.3f;
 
         [Header("Audio")]
         [Tooltip("Audio opcional que suena cuando empieza a escribirse el texto; se corta con Vaciar().")]
@@ -57,6 +70,68 @@ namespace GameJam.UI
         {
             if (!targetText) targetText = GetComponent<TextMesh>();
             if (targetText) targetText.text = string.Empty;
+
+            if (background == null) background = GetComponentInChildren<SpriteRenderer>(true);
+            ColocarCuadro();
+        }
+
+        /// <summary>
+        /// Alinea el borde izquierdo del cuadro a <see cref="textLeftMargin"/>
+        /// unidades del inicio del texto. El texto está anclado a la izquierda en
+        /// el origen del objeto, así que el cuadro se desplaza a partir de ahí.
+        /// Se calcula con los bounds en mundo: funciona con cualquier escala.
+        /// </summary>
+        private void ColocarCuadro()
+        {
+            if (background == null || background.sprite == null) return;
+
+            Bounds bounds = background.bounds;
+            float izquierdaDeseada = transform.position.x - textLeftMargin;
+            float izquierdaActual = bounds.center.x - bounds.extents.x;
+            float delta = izquierdaDeseada - izquierdaActual;
+            if (Mathf.Abs(delta) < 0.0001f) return;
+
+            background.transform.position += new Vector3(delta, 0f, 0f);
+        }
+
+        /// <summary>Vuelve a colocar el cuadro (por si se cambia el margen en runtime).</summary>
+        public void RefrescarCuadro()
+        {
+            if (background == null) background = GetComponentInChildren<SpriteRenderer>(true);
+            ColocarCuadro();
+        }
+
+        /// <summary>Aplica la misma transparencia al texto y al cuadro de fondo.</summary>
+        private void SetAlpha(float alpha)
+        {
+            if (targetText != null)
+            {
+                Color c = targetText.color;
+                c.a = alpha;
+                targetText.color = c;
+            }
+
+            if (background != null)
+            {
+                Color c = background.color;
+                c.a = alpha;
+                background.color = c;
+            }
+        }
+
+        /// <summary>Fundido de entrada del cuadro + texto al empezar el diálogo.</summary>
+        private IEnumerator FadeInRoutine()
+        {
+            float t = 0f;
+            float duracion = Mathf.Max(0.01f, fadeInDuration);
+            while (t < duracion)
+            {
+                t += Time.deltaTime;
+                // SmoothStep: entra y sale suave, como el fundido de la escena
+                SetAlpha(Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t / duracion)));
+                yield return null;
+            }
+            SetAlpha(1f);
         }
 
         private void Start()
@@ -102,7 +177,25 @@ namespace GameJam.UI
             if (!targetText) yield break;
 
             targetText.text = string.Empty;
+
+            // El cuadro y el texto empiezan invisibles y aparecen con un fundido,
+            // para no dar el salto al terminar el fundido de entrada de la escena.
+            SetAlpha(fadeInDuration > 0f ? 0f : 1f);
+
+            // Encadena con el fundido de la escena: en cuanto el negro se va,
+            // el diálogo aparece (sin el hueco de espera de antes).
+            if (waitForSceneFade)
+            {
+                var sceneFade = FindFirstObjectByType<FadeIn>();
+                if (sceneFade != null)
+                {
+                    float restante = sceneFade.FadeRemaining;
+                    if (restante > 0f) yield return new WaitForSeconds(restante);
+                }
+            }
+
             if (startDelay > 0f) yield return new WaitForSeconds(startDelay);
+            if (fadeInDuration > 0f) yield return FadeInRoutine();
 
             // El audio arranca al empezar a teclearse la línea elegida.
             int voiceStartIndex = Mathf.Clamp(voiceStartLine - 1, 0, Mathf.Max(0, lines.Length - 1));
