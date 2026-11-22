@@ -61,10 +61,75 @@ namespace GameJam.Player
         [SerializeField] private AudioClip deathSfx;
 
         public bool IsGrounded { get; private set; }
+
+        /// <summary>True mientras dura la muerte: sin física ni controles.</summary>
+        public bool IsDead { get; private set; }
+
         public float InputScale
         {
             get => inputScale;
             set => inputScale = value;
+        }
+
+        /// <summary>
+        /// Congela al jugador para morir: deja de tener físicas (ni gravedad, ni
+        /// velocidad, ni empujes) y se ignoran los controles hasta ReviveAt().
+        /// Devuelve false si ya estaba muerto, para no encadenar muertes duplicadas.
+        /// </summary>
+        public bool BeginDeath()
+        {
+            if (IsDead) return false;
+
+            IsDead = true;
+            inputAxis = 0f;
+            jumpHeld = false;
+            jumpQueued = false;
+            jumpBufferCounter = 0f;
+            coyoteCounter = 0f;
+            jumpCutAvailable = false;
+            IsGrounded = false;
+
+            if (rb != null)
+            {
+                // Parar en seco y dejar de simular: el cuerpo no cae ni recibe empujes
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+                rb.simulated = false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Reaparece en <paramref name="position"/> y devuelve el control tras
+        /// <paramref name="controlFreeze"/> segundos. Reactiva la física limpia.
+        /// </summary>
+        public void ReviveAt(Vector3 position, float controlFreeze = 0f)
+        {
+            if (!IsDead) return;
+
+            jumpQueued = false;
+            jumpBufferCounter = 0f;
+            coyoteCounter = 0f;
+            jumpCutAvailable = false;
+            inputAxis = 0f;
+            jumpHeld = false;
+
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+                rb.gravityScale = baseGravityScale;
+                transform.position = position;
+                rb.simulated = true;
+                rb.position = position;
+            }
+            else
+            {
+                transform.position = position;
+            }
+
+            IsDead = false;
+            controlLockUntil = Time.time + Mathf.Max(0f, controlFreeze);
         }
 
         /// <summary>
@@ -91,6 +156,9 @@ namespace GameJam.Player
         private float inputAxis;
         private bool jumpHeld;
 
+        // Bloqueo temporal de control al reaparecer (el player ya tiene física).
+        private float controlLockUntil;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -99,12 +167,16 @@ namespace GameJam.Player
 
         private void Update()
         {
+            if (IsDead) return;
+
             HandleInput();
             UpdateJumpTimers();
         }
 
         private void FixedUpdate()
         {
+            if (IsDead) return;
+
             CheckGround();
             ApplyGravity();
             ApplyMovement();
@@ -113,6 +185,14 @@ namespace GameJam.Player
 
         private void HandleInput()
         {
+            // Tras reaparecer, unos instantes sin control (el cuerpo ya es dinámico)
+            if (Time.time < controlLockUntil)
+            {
+                inputAxis = 0f;
+                jumpHeld = false;
+                return;
+            }
+
             var kb = Keyboard.current;
             if (kb == null)
             {

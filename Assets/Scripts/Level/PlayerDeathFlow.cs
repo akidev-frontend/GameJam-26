@@ -4,9 +4,10 @@ using UnityEngine;
 namespace GameJam.Level
 {
     /// <summary>
-    /// Flujo compartido de muerte + respawn: congela controles, reproduce la
-    /// animación de muerte, espera, teletransporta al spawn y devuelve el
-    /// control. Lo usan Hazard (helados) y XuxoPickup (xuixo malo).
+    /// Flujo compartido de muerte + respawn: congela al jugador (control y
+    /// física), reproduce la animación de muerte, espera, teletransporta al
+    /// spawn y devuelve el control. Lo usan Hazard (helados) y XuxoPickup
+    /// (xuixo malo).
     /// </summary>
     public static class PlayerDeathFlow
     {
@@ -19,26 +20,43 @@ namespace GameJam.Level
             float deathDuration,
             float respawnFreeze)
         {
-            float scale = controller ? controller.InputScale : 1f;
-            if (controller) controller.InputScale = 0f;
-            if (rb) rb.linearVelocity = Vector2.zero;
+            // Si ya está muerto (p. ej. dos hazards a la vez) no encadenamos otra
+            // muerte: antes podía quedar con los controles bloqueados para siempre.
+            if (controller != null)
+            {
+                if (!controller.BeginDeath())
+                    yield break;
+            }
+            else if (rb != null)
+            {
+                // Sin controller, al menos que no siga cayendo ni deslizándose
+                rb.linearVelocity = Vector2.zero;
+                rb.simulated = false;
+            }
+
             if (animator) animator.PlayDeath();
             if (controller) controller.PlayDeathSound();
 
             if (deathDuration > 0f)
                 yield return new WaitForSeconds(deathDuration);
 
-            if (rb)
+            if (controller != null)
             {
-                rb.position = target;
-                rb.linearVelocity = Vector2.zero;
+                // Teletransporta, reactiva la física limpia y deja un freeze de control
+                controller.ReviveAt(target, respawnFreeze);
             }
-            if (victim) victim.position = target;
-            if (animator) animator.OnRespawned();
+            else
+            {
+                if (rb != null)
+                {
+                    rb.position = target;
+                    rb.linearVelocity = Vector2.zero;
+                    rb.simulated = true;
+                }
+                if (victim) victim.position = target;
+            }
 
-            if (respawnFreeze > 0f)
-                yield return new WaitForSeconds(respawnFreeze);
-            if (controller) controller.InputScale = scale;
+            if (animator) animator.OnRespawned();
         }
     }
 }
