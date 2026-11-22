@@ -26,10 +26,18 @@ namespace GameJam.UI
         [SerializeField] private float charsPerSecond = 30f;
         [Tooltip("Segundos que se queda cada línea completa antes de la siguiente.")]
         [SerializeField] private float lineHoldSeconds = 1.5f;
+        [Tooltip("Duración específica por línea (en orden). Si una línea no tiene valor, se usa lineHoldSeconds.")]
+        [SerializeField] private float[] lineDurations;
+        [Tooltip("Ancho máximo por línea en caracteres. Las frases más largas se parten en espacios (salto de línea automático). 0 = sin límite.")]
+        [SerializeField] private int maxCharsPerLine = 40;
         [Tooltip("Si está activo, el diálogo se repite en bucle.")]
         [SerializeField] private bool loop;
         [Tooltip("Si está desactivado, no se reproduce al iniciar (se lanza manualmente con Play).")]
         [SerializeField] private bool playOnStart = true;
+
+        [Header("Audio")]
+        [Tooltip("Audio opcional que suena cuando empieza a escribirse el texto; se corta con Vaciar().")]
+        [SerializeField] private AudioSource voiceSource;
 
         private TextMesh targetText;
         private Coroutine routine;
@@ -68,6 +76,7 @@ namespace GameJam.UI
                 routine = null;
             }
             if (targetText) targetText.text = string.Empty;
+            if (voiceSource) voiceSource.Stop();
         }
 
         private IEnumerator PlayRoutine()
@@ -77,12 +86,19 @@ namespace GameJam.UI
             targetText.text = string.Empty;
             if (startDelay > 0f) yield return new WaitForSeconds(startDelay);
 
+            // El texto empieza: suena el audio opcional.
+            if (voiceSource) voiceSource.Play();
+
             do
             {
                 for (int i = 0; i < lines.Length; i++)
                 {
                     yield return TypeLine(lines[i] ?? string.Empty);
-                    yield return new WaitForSeconds(lineHoldSeconds);
+
+                    float hold = (lineDurations != null && i < lineDurations.Length)
+                        ? lineDurations[i]
+                        : lineHoldSeconds;
+                    yield return new WaitForSeconds(hold);
                 }
             }
             while (loop);
@@ -90,6 +106,7 @@ namespace GameJam.UI
 
         private IEnumerator TypeLine(string line)
         {
+            line = AjustarAncho(line);
             targetText.text = string.Empty;
             float cps = Mathf.Max(1f, charsPerSecond);
             float accumulated = 0f;
@@ -106,6 +123,44 @@ namespace GameJam.UI
                 }
                 yield return null;
             }
+        }
+
+        /// <summary>
+        /// Parte las frases demasiado largas en varias líneas, cortando por
+        /// espacios para no partir palabras. Respeta saltos de línea existentes.
+        /// </summary>
+        private string AjustarAncho(string line)
+        {
+            if (maxCharsPerLine <= 0 || string.IsNullOrEmpty(line)) return line;
+
+            var resultado = new System.Text.StringBuilder();
+            foreach (var parrafo in line.Split('\n'))
+            {
+                var palabras = parrafo.Split(' ');
+                int largo = 0;
+                for (int i = 0; i < palabras.Length; i++)
+                {
+                    var palabra = palabras[i];
+                    int extra = (largo > 0) ? 1 : 0; // el espacio que la precede
+
+                    if (largo + extra + palabra.Length > maxCharsPerLine && largo > 0)
+                    {
+                        resultado.Append('\n');
+                        largo = 0;
+                        extra = 0;
+                    }
+                    else if (i > 0 && largo > 0)
+                    {
+                        resultado.Append(' ');
+                    }
+
+                    resultado.Append(palabra);
+                    largo += extra + palabra.Length;
+                }
+                resultado.Append('\n');
+            }
+            // Quitar el salto final sobrante de cada párrafo procesado.
+            return resultado.ToString().TrimEnd('\n');
         }
     }
 }

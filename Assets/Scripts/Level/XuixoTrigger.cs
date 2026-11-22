@@ -90,7 +90,10 @@ namespace GameJam.Level
             // El texto de arriba (DialogueText) desaparece justo al tocar;
             // en su lugar aparece otro con la secuencia nueva.
             if (textoAnterior != null)
+            {
                 textoAnterior.SetActive(false);
+                textoAnterior.GetComponent<GameJam.UI.DialogueSystem>()?.Vaciar();
+            }
 
             if (dialogue != null)
             {
