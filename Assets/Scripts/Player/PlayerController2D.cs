@@ -54,11 +54,29 @@ namespace GameJam.Player
         [Tooltip("Multiplica el input horizontal. Nivel 2 lo pone a -1 para invertir los controles.")]
         [SerializeField] private float inputScale = 1f;
 
+        [Header("Teclas")]
+        [Tooltip("Tecla para moverse a la izquierda.")]
+        [SerializeField] private Key leftKey = Key.A;
+        [Tooltip("Tecla para moverse a la derecha.")]
+        [SerializeField] private Key rightKey = Key.D;
+        [Tooltip("Tecla para saltar.")]
+        [SerializeField] private Key jumpKey = Key.Space;
+        [Tooltip("Tecla alternativa para saltar. Key.None = desactivada.")]
+        [SerializeField] private Key jumpAltKey = Key.W;
+        [Tooltip("Si está activo, las flechas izquierda/derecha también mueven al personaje.")]
+        [SerializeField] private bool useArrowKeys = true;
+        [Tooltip("Si está activo, la barra espaciadora también salta.")]
+        [SerializeField] private bool useSpaceKey = true;
+
         [Header("Sonido")]
         [Tooltip("AudioSource 2D del jugador para sus efectos.")]
         [SerializeField] private AudioSource sfxSource;
         [Tooltip("Clip que suena cada vez que el personaje muere.")]
         [SerializeField] private AudioClip deathSfx;
+        [Tooltip("Clip que suena cada vez que salta.")]
+        [SerializeField] private AudioClip jumpSfx;
+        [Tooltip("Clip que suena cada vez que come un xuixo.")]
+        [SerializeField] private AudioClip eatSfx;
 
         public bool IsGrounded { get; private set; }
 
@@ -145,6 +163,28 @@ namespace GameJam.Player
                 AudioSource.PlayClipAtPoint(deathSfx, transform.position);
         }
 
+        /// <summary>Reproduce el sonido de salto.</summary>
+        private void PlayJumpSound()
+        {
+            if (jumpSfx == null) return;
+
+            if (sfxSource != null)
+                sfxSource.PlayOneShot(jumpSfx);
+            else
+                AudioSource.PlayClipAtPoint(jumpSfx, transform.position);
+        }
+
+        /// <summary>Reproduce el sonido de comer un xuixo. Lo llama XuxoPickup.</summary>
+        public void PlayEatSound()
+        {
+            if (eatSfx == null) return;
+
+            if (sfxSource != null)
+                sfxSource.PlayOneShot(eatSfx);
+            else
+                AudioSource.PlayClipAtPoint(eatSfx, transform.position);
+        }
+
         private Rigidbody2D rb;
         private float baseGravityScale;
         private float coyoteCounter;
@@ -202,12 +242,27 @@ namespace GameJam.Player
             }
 
             inputAxis = 0f;
-            if (kb.leftArrowKey.isPressed || kb.aKey.isPressed) inputAxis -= 1f;
-            if (kb.rightArrowKey.isPressed || kb.dKey.isPressed) inputAxis += 1f;
 
-            jumpHeld = kb.spaceKey.isPressed || kb.wKey.isPressed;
-            if (kb.spaceKey.wasPressedThisFrame || kb.wKey.wasPressedThisFrame)
+            // Teclas configurables por nivel (Level3 usa A / H / Ctrl)
+            if (IsDown(kb, leftKey) || (useArrowKeys && kb.leftArrowKey.isPressed)) inputAxis -= 1f;
+            if (IsDown(kb, rightKey) || (useArrowKeys && kb.rightArrowKey.isPressed)) inputAxis += 1f;
+
+            jumpHeld = IsDown(kb, jumpKey) || IsDown(kb, jumpAltKey) ||
+                       (useSpaceKey && kb.spaceKey.isPressed);
+
+            if (WasPressed(kb, jumpKey) || WasPressed(kb, jumpAltKey) ||
+                (useSpaceKey && kb.spaceKey.wasPressedThisFrame))
                 jumpQueued = true;
+        }
+
+        private static bool IsDown(Keyboard kb, Key key)
+        {
+            return key != Key.None && kb[key].isPressed;
+        }
+
+        private static bool WasPressed(Keyboard kb, Key key)
+        {
+            return key != Key.None && kb[key].wasPressedThisFrame;
         }
 
         private void UpdateJumpTimers()
@@ -287,6 +342,7 @@ namespace GameJam.Player
                 coyoteCounter = 0f;
                 jumpBufferCounter = 0f;
                 jumpCutAvailable = true;
+                PlayJumpSound();
             }
             else if (jumpCutAvailable && !jumpHeld && rb.linearVelocity.y > 0f)
             {

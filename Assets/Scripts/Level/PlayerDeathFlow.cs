@@ -11,6 +11,12 @@ namespace GameJam.Level
     /// </summary>
     public static class PlayerDeathFlow
     {
+        /// <summary>
+        /// Se dispara al empezar una muerte (ya con el jugador congelado).
+        /// Lo usan cosas como DialogueOnDeath para mostrar frases al morir.
+        /// </summary>
+        public static event System.Action<Transform> PlayerDied;
+
         public static IEnumerator Run(
             Transform victim,
             GameJam.Player.PlayerController2D controller,
@@ -33,6 +39,8 @@ namespace GameJam.Level
                 rb.linearVelocity = Vector2.zero;
                 rb.simulated = false;
             }
+
+            PlayerDied?.Invoke(victim);
 
             if (animator) animator.PlayDeath();
             if (controller) controller.PlayDeathSound();

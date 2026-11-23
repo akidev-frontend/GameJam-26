@@ -17,6 +17,9 @@ namespace GameJam.UI
         [Tooltip("CanvasGroup cuyo alpha se anima (el del propio Canvas si se deja vacío).")]
         [SerializeField] private CanvasGroup canvasGroup;
 
+        // Momento (Time.time) en el que arranca el fundido, para saber cuánto queda.
+        private float fadeStartTime;
+
         // En el editor mantenemos el overlay transparente para que no
         // tape la escena en la vista de Scene (en play lo controla la corrutina).
         private void OnEnable()
@@ -30,10 +33,24 @@ namespace GameJam.UI
             }
         }
 
+        private void Awake()
+        {
+            // Marca de inicio para que otros sistemas (p. ej. DialogueSystem)
+            // sepan cuánto queda de fundido sin depender del orden de Start().
+            fadeStartTime = Time.time;
+        }
+
         private void Start()
         {
             if (Application.isPlaying) StartCoroutine(Fade());
         }
+
+        /// <summary>Segundos que le quedan al fundido de entrada (0 si ya terminó).</summary>
+        public float FadeRemaining =>
+            Application.isPlaying ? Mathf.Max(0f, fadeStartTime + duration - Time.time) : 0f;
+
+        /// <summary>True mientras la pantalla aún se está aclarando al entrar en la escena.</summary>
+        public bool IsFading => FadeRemaining > 0f;
 
         private IEnumerator Fade()
         {

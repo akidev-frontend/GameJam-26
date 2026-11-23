@@ -112,3 +112,6 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Performance Testing package: resultados autogenerados al lanzar los tests
+/[Aa]ssets/[Rr]esources/PerformanceTestRun*.json*

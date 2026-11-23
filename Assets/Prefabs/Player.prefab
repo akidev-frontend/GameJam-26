@@ -233,8 +233,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   inputScale: 1
+  leftKey: 15
+  rightKey: 18
+  jumpKey: 1
+  jumpAltKey: 37
+  useArrowKeys: 1
+  useSpaceKey: 1
   sfxSource: {fileID: 794072132498504973}
   deathSfx: {fileID: 8300000, guid: bd6405d196e4417d7856b1839b171e9f, type: 3}
+  jumpSfx: {fileID: 8300000, guid: ee6f06e3aa957d0e9a62222cb7e61c43, type: 3}
+  eatSfx: {fileID: 8300000, guid: 1e66ca9c07c08f1cb84bfa506c616408, type: 3}
 --- !u!114 &6890424188964894233
 MonoBehaviour:
   m_ObjectHideFlags: 0

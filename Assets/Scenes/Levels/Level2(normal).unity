@@ -1528,6 +1528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.UI.XuixoCounterText
   totalPieces: 6
+  anchor: 0
   marginX: 0.04
   marginY: 0.95
   poster: {fileID: 0}
